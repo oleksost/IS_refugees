@@ -42,8 +42,8 @@ for (i in 1:length(tagsToLoad)){
 write.csv(data.refugees, file = "Data/Data_refugees.csv")
 
 ##################################################################################
-#extract hashtags and add to the data frame
-
+#extract hashtags and add to the data frame in column "Ahshtags
+#s
 caption<-data.refugees$caption
 listsOfHasgtags<-lapply(caption, FUN=function(x)grep(pattern = "^#.*",strsplit(x, " |\n")[[1]],value = T) )
 vactorOfHashtags<-unlist(as.vector(lapply(listsOfHasgtags, FUN = function(x) paste(x, collapse = " "))))
