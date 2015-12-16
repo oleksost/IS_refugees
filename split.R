@@ -11,3 +11,7 @@ x<-split(splited, 1:3)
 liza<-data.frame(x[1])
 dima<-data.frame(x[2])
 lesha<-data.frame(x[3])
+
+write.csv(x = liza, file='liza.csv', row.names = F)
+write.csv(x = dima, file='dima.csv', row.names = F)
+write.csv(x = lesha, file='lesha.csv', row.names = F)
