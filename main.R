@@ -1,4 +1,4 @@
-#setwd("~/Documents/HU Berlin/WI 1516/refugeestest/IS refugees")
+setwd("~/Documents/HU Berlin/WI 1516/refugeestest/IS refugees")
 source("instaAuth.R")
 source("searchForHashtag.R")
 source("Utils.R")
@@ -27,7 +27,8 @@ load("../my_oauth")
 data.refugees <- searchInstagram(tag="refugees", token=my_oauth, n = 200000)
 
 write.csv(data.refugees, file = "Data/Data_refugees.csv")
-data.refugees<-read.csv(file ="Data/Data_refugees.csv")
+#read data
+#data.refugees<-read.csv(file ="Data/Data_refugees.csv")
 data.refugees[,1]<-NULL
 
 #tagsToLoad<-c("refugeesnotwelcome","norefugees","flüchtling","überfremdung", "refugees","wakeupeurope", "norefugees","refugeecrisis","nomorerefugees","syrianrefugees")
@@ -41,15 +42,16 @@ for (i in 1:length(tagsToLoad)){
   write.csv(data.refugees, file = "Data/Data_refugees.csv")
 }
 write.csv(data.refugees, file = "Data/Data_refugees.csv")
-
 ##################################################################################
-#extract hashtags and add to the data frame in column "Ahshtags 
-caption<-data.refugees$caption
-listsOfHasgtags<-lapply(caption, FUN=function(x)grep(pattern = "^#.*",strsplit(x, " |\n")[[1]],value = T) )
-vactorOfHashtags<-unlist(as.vector(lapply(listsOfHasgtags, FUN = function(x) paste(x, collapse = " "))))
-data.refugees$HashTags<-vactorOfHashtags
+data.with.GeoLocation<-data.refugees[!is.na(data.refugees$longitude),]
 
-write.csv(data.refugees, file = "Data_refugees.csv", sep = ";")
+#random data selecting
+install.packages("caret",dep=TRUE)
+require("caret")
+
+idizies<-createDataPartition(y = data.with.GeoLocation$X, p=0.2, list=FALSE)
+random.data.twentypercent<-data.with.GeoLocation[idizies,]
+write.csv(data.refugees, file = "Random 20 percent.csv")
 
 
 

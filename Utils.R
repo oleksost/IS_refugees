@@ -21,6 +21,13 @@ unlistWithNA <- function(lst, field){
   return(vect)
 }
 
+unlistTagsWithNA<-function(lst){
+  notnulls <- unlist(lapply(lst, function(x) !is.null(x[["tags"]])))
+  vect <- rep(NA, length(lst))
+  vect[notnulls] <- unlist(lapply(lst, function(x) paste(x$tags, collapse = " ")))
+  return(vect)
+}
+
 searchListToDF <- function(data){
   df <- data.frame(
     type = unlistWithNA(data, 'type'),
@@ -35,6 +42,8 @@ searchListToDF <- function(data){
     likes_count = unlistWithNA(data, c('likes', 'count')),
     image_url = unlistWithNA(data, c('images', 'standard_resolution', 'url')),
     caption = unlistWithNA(data, c('caption', 'text')),
+    #add tags
+    tags=unlistTagsWithNA(data),
     username = unlistWithNA(data, c('user', 'username')),
     user_id = unlistWithNA(data, c('user', 'id')),
     user_fullname = unlistWithNA(data, c('user', 'full_name')),
