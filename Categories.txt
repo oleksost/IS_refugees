@@ -1,6 +1,10 @@
-1. Foto/Picture
-2. Portrait /Documentary/landscape
-3. Connected to Refugee crisis? Directly /Indirectly/ Not related
-4. Positive / Negative / Neutral / Not related
-5. Refugees on the Foto? (Yes/No)
-6. Likeseeker?
+1. Foto/[Text/Picture/Kartinka]/Portrait /Documentary/Landscape
+2. Foto shows refugees help? (Food, clothes etc.) (1/0)
+3. Text is about refugees help? (1/0)
+4. Refugees on the Foto? (1/0)
+5. Text is about the refugees crisis? (1/0)
+6. Refugee’s boats on the foot? (1/0)
+7. Foto is related to the sea crossing (1/0)
+8. Overall Post connected to the Refugee crisis? (1/0)
+9. The overall impression of the post towards ref. crisis (Positive/Neutral/Skeptical/Negative)<-dummy vars
+10. Likeseeker?
