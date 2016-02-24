@@ -1,6 +1,6 @@
 setwd("~/Documents/HU Berlin/WI 1516/refugeestest/IS refugees")
 #reading data
-data.refugees<-read.csv(file ="Data/Data_refugees.csv")
+data.refugees<-read.csv(file ="../Data/Data_refugees_nachgeladen040116.csv")
 #Find seperate words for santiment
 
 score.sentiment = function(sentences, pos.words, neg.words, exc.words, .progress='none')
@@ -50,7 +50,7 @@ score.sentiment = function(sentences, pos.words, neg.words, exc.words, .progress
 
 
 
-data.refugees<-read.csv(file ="Data/Data_refugees_nachgeladen040116.csv")
+data.refugees<-read.csv(file ="../Data/Data_refugees_nachgeladen040116.csv")
 colnames(data.refugees)
 data_for_sentiment<-data.refugees[,c(13,18)]
 #remove 
@@ -64,6 +64,8 @@ table(analysis$score)
 hist(analysis$score)
 
 ##################################################################################
+#Try using WEB API
+#Doestn work
 library(httr)
 #API Sentiment Analysis
 text<-data_for_sentiment_cleaned[13]
@@ -77,6 +79,31 @@ install.packages("JSON")
 http_status(r)
 str(content(r))
 content(r, "text")
+
+##################################################################################
+#sentiment package
+install.packages("sentiment")
+library(sentiment)
+library(plyr)
+library(ggplot2)
+library(wordcloud)
+library(RColorBrewer)
+
+data_for_sentiment_cleaned[1]
+
+# classify emotion
+class_emo = classify_emotion(data_for_sentiment_cleaned[1], algorithm="bayes", prior=1.0)
+# get emotion best fit
+emotion = class_emo[,7]
+# substitute NA's by "unknown"
+emotion[is.na(emotion)] = "unknown"
+
+# classify polarity
+class_pol = classify_polarity(some_txt, algorithm="bayes")
+# get polarity best fit
+polarity = class_pol[,4]
+
+
 
 
 
